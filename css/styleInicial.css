@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Kadwa', sans-serif;
+    background-image: url("../assets/img/fundoInicial.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+h1{
+    font-size: 6rem;
+    font-weight: 500;
+
+}
+
+h1 > span{
+
+    color: #00AFF0;
+}
+
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F9FE;
+    border: 1px solid #E2E8F0;
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #5F6368;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 280px; 
+    height: 48px;
+  }
+
+  .google-button:hover {
+    background-color: #EDF2F7;
+  }
+
+  .google-button img {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .input-container {
+    margin-top: 20px;
+    position: relative;
+    width: 300px;
+    padding: 10px;
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .input-container label {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #757575;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .input-container input {
+    width: 100%;
+    border: none;
+    background: none;
+    font-size: 14px;
+    padding: 20px 10px 10px 10px;
+    color: #333;
+    outline: none;
+  }
+
+  .btn-cadastrar {
+    width: 300px;
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #00a6e8; 
+    color: #fff; 
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .btn-cadastrar:hover {
+    background-color: #008dc4; 
+  }
+
+  .btn-cadastrar span {
+    font-weight: 500;
+    margin-left: 15px; 
+    font-size: 20px;
+  }
