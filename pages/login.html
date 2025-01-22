@@ -1,14 +1,131 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Login - OnlyFreelas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../css/styleInicial.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../css/styleEvents.css"
+      />
     
-</body>
+
+  </head>
+  <body>
+    <section class="container">
+      <h1>Only<span>Freelas</span></h1>
+      
+      <!-- Login com Google -->
+      <a href="#" class="google-button" onclick="loginWithGoogle()">
+        <img src="../assets/icons/iconGoogle.png" alt="Google logo" />
+        Continue com Google
+        <div class="loading google-loading"></div>
+      </a>
+
+      <!-- Login Form -->
+      <div class="input-container">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="johndoe@email.com" />
+      </div>
+
+      <div class="input-container">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="********" />
+      </div>
+
+      <button class="btn-cadastrar" onclick="simulateLogin()">
+        Entrar
+        <span>></span>
+        <div class="loading form-loading"></div>
+      </button>
+
+      <section class="infos">
+        <div>
+          Ao se inscrever no OnlyFreelas, significa que você concorda com nossa
+          Política de Privacidade e Termos de Serviço
+        </div>
+        <div class="jaMembro">
+          Esqueceu a senha? <a href="../pages/newSenha.html">Redefina aqui</a>
+        </div>
+      </section>
+
+      <!-- Toast Container -->
+      <div class="toast-container" id="toastContainer"></div>
+    </section>
+
+    <script>
+      // Função para criar e exibir o toast
+      function showToast(message, type) {
+        const toastContainer = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.classList.add(type); // 'success' ou 'error'
+        toast.innerText = message;
+
+        // Adiciona o toast à tela
+        toastContainer.appendChild(toast);
+
+        // Exibe o toast com animação
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 100);
+
+        // Remove o toast após 3 segundos
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 500);
+        }, 3000);
+      }
+
+      // Simulação do login com Google
+      function loginWithGoogle() {
+        document.querySelector(".google-loading").style.display = "block";
+        setTimeout(() => {
+          document.querySelector(".google-loading").style.display = "none";
+          showToast("Login com Google bem-sucedido (simulado)!", "success");
+        }, 2000);
+      }
+
+      // Simulação do envio do código de redefinição de senha
+      function simulateLogin() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+          showToast("Por favor, preencha os campos.", "error");
+          return;
+        }
+
+        document.querySelector(".form-loading").style.display = "block";
+
+        setTimeout(() => {
+          document.querySelector(".form-loading").style.display = "none";
+
+          const correctEmail = "will@will";
+          const correctPassword = "1234";
+
+          if (email === correctEmail && password === correctPassword) {
+            showToast("Login bem-sucedido!", "success");
+            // Redireciona para listProjects.html após 1 segundo
+            setTimeout(() => {
+              window.location.href = "selectType.html";
+            }, 1000);
+          } else {
+            showToast("Senha incorreta!", "error");
+          }
+        }, 2000);
+      }
+    </script>
+  </body>
 </html>

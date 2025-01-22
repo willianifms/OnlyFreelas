@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Registrar - OnlyFreelas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../css/styleInicial.css"
+    />
+    <link
+    rel="stylesheet"
+    type="text/css"
+    media="screen"
+    href="../css/styleEvents.css"
+  />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kadwa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      function showToast(message, type = "success") {
+        const toastContainer =
+          document.querySelector(".toast-container") || createToastContainer();
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerText = message;
+
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 10);
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
+      }
+
+      function createToastContainer() {
+        const container = document.createElement("div");
+        container.className = "toast-container";
+        document.body.appendChild(container);
+        return container;
+      }
+
+      function showLoadingSpinner(show) {
+        const spinner = document.querySelector(".loading");
+        if (show) {
+          spinner.style.display = "inline-block";
+        } else {
+          spinner.style.display = "none";
+        }
+      }
+
+      function registerUser(event) {
+        event.preventDefault(); // Previne o envio padrão do formulário
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+          showToast("Por favor, preencha todos os campos!", "error");
+          return;
+        }
+
+        showLoadingSpinner(true);
+
+        // Simula um atraso no registro (exemplo de carregamento)
+        setTimeout(() => {
+          localStorage.setItem("userEmail", email);
+          localStorage.setItem("userPassword", password);
+
+          showLoadingSpinner(false);
+          showToast("Registro bem-sucedido!", "success");
+
+          setTimeout(() => {
+            window.location.href = "../pages/login.html";
+          }, 3000);
+        }, 2000); // Simula 2 segundos de carregamento
+      }
+    </script>
+  </head>
+  <body>
+    <section class="container">
+      <h1>Only<span>Freelas</span></h1>
+      <form onsubmit="registerUser(event)">
+        <a href="#" class="google-button">
+          <img src="../assets/icons/iconGoogle.png" alt="Google logo" />
+          Continue com Google
+        </a>
+        <div class="input-container">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="johndoe@email.com" />
+        </div>
+
+        <div class="input-container">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="********" />
+        </div>
+
+        <button type="submit" class="btn-cadastrar">
+          Registrar
+          <span>></span>
+        </button>
+        <div class="loading"></div>
+      </form>
+      <section class="infos">
+        <div>
+          Ao se inscrever no OnlyFreelas, significa que você concorda com nossa
+          Política de Privacidade e Termos de Serviço
+        </div>
+        <div class="jaMembro">
+          Já é membro?
+          <a href="../pages/login.html">
+            <span>CONECTE-SE</span>
+          </a>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>

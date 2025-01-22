@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Redefinir Senha - OnlyFreelas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../css/styleInicial.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="../css/styleEvents.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kadwa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="container">
+      <h1>Only<span>Freelas</span></h1>
+      <h2>Redefinir Senha</h2>
+<div class="inputs">
+
+
+      <div class="input-container">
+        <label for="email">Digite seu e-mail</label>
+        <input type="email" id="email" placeholder="johndoe@email.com" />
+      </div>
+
+    </div>
+      <button class="btn-cadastrar" onclick="sendResetCode()">
+        Enviar código
+        <div class="loading reset-loading"></div>
+      </button>
+
+      <section class="infos">
+        <div>
+          Após receber o código, acesse o e-mail para continuar o processo de
+          redefinição de senha.
+        </div>
+        <div class="jaMembro">
+          Lembrou a senha? <a href="../pages/index.html">Voltar ao login</a>
+        </div>
+      </section>
+    </section>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="../js/newSenha.js"></script>
+  </body>
+</html>
