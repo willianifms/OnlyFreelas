@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ficha de Cadastro - OnlyFreelas</title>
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                color: #333;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
+                padding: 20px;
+            }
+
+            .form-box {
+                border: 2px solid #00aaff;
+                border-radius: 10px;
+                padding: 40px;
+                width: 100%;
+                max-width: 400px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .form-box h1 {
+                font-size: 24px;
+                margin-bottom: 30px;
+                font-weight: bold;
+            }
+
+            .form-box label {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 5px;
+                text-align: left;
+            }
+
+            .form-box input,
+            .form-box select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #00aaff;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+
+            .form-box input:focus,
+            .form-box select:focus {
+                outline: none;
+                border-color: #005f99;
+                box-shadow: 0 0 3px #005f99;
+            }
+
+            .form-box .button-group {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .form-box button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .form-box button.cancel {
+                background-color: #333;
+                color: #fff;
+            }
+
+            .form-box button.cancel:hover {
+                background-color: #555;
+            }
+
+            .form-box button.submit {
+                background-color: #00aaff;
+                color: #fff;
+            }
+
+            .form-box button.submit:hover {
+                background-color: #005f99;
+            }
+
+            .footer {
+        background-color: #121212;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        margin-top: auto; /
+      }
+
+      .footer .highlight {
+        color: #00aaff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-box">
+        <h1>Ficha de Cadastro</h1>
+        <form>
+          <label for="nomeCompleto">Nome Completo <span>*</span></label>
+          <input
+            type="text"
+            id="nomeCompleto"
+            placeholder="Digite o Nome Completo"
+            required
+          />
+
+          <label for="email">Email <span>*</span></label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Digite o Email"
+            required
+          />
+
+          <label for="categoriaServico"
+            >Categoria do Serviço <span>*</span></label
+          >
+          <select id="categoriaServico" required>
+            <option value="" disabled selected>Selecione a Categoria</option>
+            <option value="design">Design</option>
+            <option value="programacao">Programação</option>
+            <option value="redacao">Redação</option>
+          </select>
+
+          <div class="button-group">
+            <a href="../pages/selectType.html">
+              <button type="button" class="cancel">Cancelar</button></a
+            >
+            <a href="../pages/pageInicialFreelancer.html">
+              <button type="button" class="submit">Cadastrar</button></a
+            >
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
+  </body>
+</html>

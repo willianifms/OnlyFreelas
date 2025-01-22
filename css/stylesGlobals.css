@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #222;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  main {
+    padding: 2rem;
+  }
+  
+  .projetos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .projeto-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  .detalhes-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .detalhes-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  #detalhes-projeto {
+    text-align: center;
+  }
+  
+  .voltar {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+  
+  .voltar:hover {
+    background-color: #0056b3;
+  }
+  
