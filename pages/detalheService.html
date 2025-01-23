@@ -1,22 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalhes do Projeto</title>
-  <link rel="stylesheet" href="../css/stylesGlobals.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhe do Serviço</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        #item-detail {
+            background: #fff;
+            padding: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>OnlyFreelas</h1>
-  </header>
-  <main>
-    <div id="detalhes-projeto">
-      <h2 id="titulo-projeto"></h2>
-      <p id="descricao-projeto"></p>
-      <a href="pageInicialFreelancer.html" class="voltar">Voltar</a>
+    <div id="item-detail">
+        <h2 id="item-name">Nome do Item</h2>
+        <p id="item-description">Descrição completa do item...</p>
+        <p id="item-category">Categoria: </p>
     </div>
-  </main>
-  <script src="../js/index.js"></script>
+    <button onclick="goBack()">Voltar</button>
+    <button onclick="showInterest()">Tenho Interesse</button>
+
+    <script>
+        // Função para carregar os detalhes do projeto com base no ID na URL
+        function loadItemDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = parseInt(urlParams.get('id'));
+            const projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const project = projects.find(p => p.id === itemId);
+
+            if (project) {
+                document.getElementById('item-name').innerText = project.name;
+                document.getElementById('item-description').innerText = project.description;
+                document.getElementById('item-category').innerText = `Categoria: ${project.category}`;
+            } else {
+                alert('Projeto não encontrado.');
+                goBack();
+            }
+        }
+
+        // Função para voltar para a página anterior
+        function goBack() {
+            window.history.back();
+        }
+
+        // Função para mostrar interesse (salva o projeto no localStorage)
+        function showInterest() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = parseInt(urlParams.get('id'));
+            const projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const project = projects.find(p => p.id === itemId);
+
+            if (project) {
+                let interestedItems = JSON.parse(localStorage.getItem('interestedItems')) || [];
+                interestedItems.push(project);
+                localStorage.setItem('interestedItems', JSON.stringify(interestedItems));
+
+                // Adiciona o ID do freelancer interessado ao projeto
+                let interestedFreelancers = JSON.parse(localStorage.getItem('interestedFreelancers')) || {};
+                interestedFreelancers[itemId] = interestedFreelancers[itemId] || [];
+                interestedFreelancers[itemId].push('Freelancer1'); // Substitua 'Freelancer1' pelo ID real do freelancer
+                localStorage.setItem('interestedFreelancers', JSON.stringify(interestedFreelancers));
+
+                alert('Você demonstrou interesse neste item!');
+            } else {
+                alert('Projeto não encontrado.');
+            }
+        }
+
+        // Carrega os detalhes do projeto ao carregar a página
+        window.onload = loadItemDetails;
+    </script>
 </body>
 </html>

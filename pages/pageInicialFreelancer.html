@@ -1,35 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projetos</title>
-  <link rel="stylesheet" href="../css/stylesGlobals.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFreelas - Página Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #0d1117;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        header a {
+            color: #58a6ff;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+        .container {
+            display: flex;
+            padding: 2rem;
+        }
+        .filter {
+            width: 25%;
+            margin-right: 2rem;
+        }
+        .filter select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #58a6ff;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .projects {
+            width: 75%;
+        }
+        .project-card {
+            background: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .project-card img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .project-card h3 {
+            margin: 0 0 0.5rem;
+            color: #0d1117;
+        }
+        .project-card p {
+            margin: 0;
+        }
+        .project-card a {
+            margin-top: 0.5rem;
+            color: #58a6ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>OnlyFreelas</h1>
-  </header>
-  <main>
-    <h2>Lista de Projetos</h2>
-    <div class="projetos">
-      <div class="projeto-card" data-id="1">
-        <h3>Criar Logo Empresarial</h3>
-        <p>Preciso de uma logo para minha empresa de advocacia</p>
-        <button class="detalhes-btn">Ver Detalhes</button>
-      </div>
-      <div class="projeto-card" data-id="2">
-        <h3>Website Pessoal</h3>
-        <p>Preciso de um website pessoal com portfólio</p>
-        <button class="detalhes-btn">Ver Detalhes</button>
-      </div>
-      <div class="projeto-card" data-id="3">
-        <h3>E-commerce</h3>
-        <p>Desenvolvimento de um e-commerce para roupas</p>
-        <button class="detalhes-btn">Ver Detalhes</button>
-      </div>
+    <header>
+        <div>Only<span style="color: #58a6ff;">Freelas</span></div>
+        <nav>
+            <a href="pageInicialFreelancer.html">Encontre Projeto</a>
+            <a href="tenhoInteresse.html">Interesses</a>
+            <a href="perfil.html">Perfil</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="filter">
+            <h2>Filtro</h2>
+            <label for="category-filter">Categoria do Projeto</label>
+            <select id="category-filter">
+                <option value="all">Todas</option>
+                <option value="design">Design</option>
+                <option value="programacao">Programação</option>
+                <option value="redacao">Redação</option>
+                <option value="marketing">Marketing</option>
+            </select>
+        </div>
+
+        <div class="projects">
+            <h2>Projetos</h2>
+            <div id="projects-list">
+                <!-- Projetos serão listados aqui -->
+            </div>
+        </div>
     </div>
-  </main>
-  <script src="../js/index.js"></script>
+
+    <script>
+        // Função para carregar os projetos do localStorage
+        function loadProjects() {
+            const projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const projectsList = document.getElementById('projects-list');
+            projectsList.innerHTML = '';
+
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<p>Não há projetos no momento.</p>';
+                return;
+            }
+
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.classList.add('project-card');
+                projectCard.setAttribute('data-category', project.category);
+
+                projectCard.innerHTML = `
+                    <img src="https://via.placeholder.com/40" alt="Avatar">
+                    <div>
+                        <h3>${project.name}</h3>
+                        <p>${project.description}</p>
+                        <p>Categoria: ${project.category}</p>
+                        <a href="detalheService.html?id=${project.id}">Ver detalhes</a>
+                    </div>
+                `;
+
+                projectsList.appendChild(projectCard);
+            });
+        }
+
+        // Função para filtrar os projetos
+        function filterProjects() {
+            const selectedCategory = document.getElementById('category-filter').value;
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (selectedCategory === 'all' || category === selectedCategory) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Carrega os projetos ao carregar a página
+        window.onload = () => {
+            loadProjects();
+            document.getElementById('category-filter').addEventListener('change', filterProjects);
+        };
+    </script>
 </body>
 </html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Freelancer - OnlyFreelas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .profile-card {
+            background: #fff;
+            padding: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin: auto;
+        }
+        .profile-card h2 {
+            margin-top: 0;
+        }
+        .profile-card p {
+            margin: 0.5rem 0;
+        }
+        .payment-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #58a6ff;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .payment-button:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Perfil do Freelancer</h2>
+    <div class="profile-card" id="profile-card">
+        <!-- Dados do perfil serão carregados aqui -->
+    </div>
+    <button class="payment-button" onclick="showFullProfile()">Pagar para liberar os dados completos</button>
+
+    <script>
+        // Função para carregar os dados do perfil do freelancer
+        function loadFreelancerProfile() {
+            const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
+
+            const profileCard = document.getElementById('profile-card');
+            profileCard.innerHTML = `
+                <h3>Nome: ${freelancer.fantasyName || freelancer.nomeCompleto}</h3>
+                <p>Email: ***@***</p>
+                <p>Descrição: ${freelancer.description || 'Descrição não disponível'}</p>
+                <p>Categoria: ${freelancer.categoriaServico}</p>
+            `;
+        }
+
+        // Função para exibir o perfil completo após o pagamento
+        function showFullProfile() {
+            const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
+
+            const profileCard = document.getElementById('profile-card');
+            profileCard.innerHTML = `
+                <h3>Nome: ${freelancer.fantasyName || freelancer.nomeCompleto}</h3>
+                <p>Email: ${freelancer.email}</p>
+                <p>Descrição: ${freelancer.description || 'Descrição não disponível'}</p>
+                <p>Categoria: ${freelancer.categoriaServico}</p>
+            `;
+
+            alert('Pagamento realizado com sucesso! Dados completos liberados.');
+        }
+
+        // Carrega os dados do perfil ao carregar a página
+        window.onload = loadFreelancerProfile;
+    </script>
+</body>
+</html>

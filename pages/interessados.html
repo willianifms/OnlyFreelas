@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFreelas - Interessados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .interested-card {
+            background: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .interested-card img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .interested-card h3 {
+            margin: 0 0 0.5rem;
+            color: #0d1117;
+        }
+        .interested-card p {
+            margin: 0;
+        }
+        .interested-card button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #58a6ff;
+            color: #fff;
+        }
+        .interested-card button:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Freelancers Interessados</h2>
+    <div id="interested-list">
+        <!-- Freelancers interessados serão listados aqui -->
+    </div>
+
+    <script>
+        // Função para carregar os freelancers interessados do localStorage
+        function loadInterestedFreelancers() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = parseInt(urlParams.get('id'));
+            const interestedFreelancers = JSON.parse(localStorage.getItem('interestedFreelancers')) || {};
+            const freelancersList = document.getElementById('interested-list');
+            freelancersList.innerHTML = '';
+
+            if (!interestedFreelancers[projectId] || interestedFreelancers[projectId].length === 0) {
+                freelancersList.innerHTML = '<p>Não há freelancers interessados no momento.</p>';
+                return;
+            }
+
+            interestedFreelancers[projectId].forEach(freelancerId => {
+                const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
+
+                const freelancerCard = document.createElement('div');
+                freelancerCard.classList.add('interested-card');
+
+                freelancerCard.innerHTML = `
+                    <img src="https://via.placeholder.com/40" alt="Avatar">
+                    <div>
+                        <h3>${freelancer.nomeCompleto}</h3>
+                        <p>Categoria: ${freelancer.categoriaServico}</p>
+                    </div>
+                    <button onclick="viewProfile()">Ver Perfil</button>
+                `;
+
+                freelancersList.appendChild(freelancerCard);
+            });
+        }
+
+        // Função para ver o perfil do freelancer
+        function viewProfile() {
+            window.location.href = 'perfilFreelancer.html';
+        }
+
+        // Carrega os freelancers interessados ao carregar a página
+        window.onload = loadInterestedFreelancers;
+    </script>
+</body>
+</html>

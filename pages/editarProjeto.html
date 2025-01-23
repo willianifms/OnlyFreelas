@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFreelas - Editar Projeto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .project-form {
+            background: #fff;
+            padding: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .project-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .project-form input, .project-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .project-form button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #58a6ff;
+            color: #fff;
+        }
+        .project-form button:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Editar Projeto</h2>
+    <div class="project-form">
+        <label for="project-name">Nome do Projeto:</label>
+        <input type="text" id="project-name" name="project-name">
+
+        <label for="project-description">Descrição:</label>
+        <textarea id="project-description" name="project-description" rows="4"></textarea>
+
+        <button onclick="saveProject()">Salvar</button>
+    </div>
+
+    <script>
+        // Função para carregar os dados do projeto para edição
+        function loadProjectDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = parseInt(urlParams.get('id'));
+            const projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const project = projects.find(p => p.id === projectId);
+
+            if (project) {
+                document.getElementById('project-name').value = project.name;
+                document.getElementById('project-description').value = project.description;
+            } else {
+                alert('Projeto não encontrado.');
+                location.href = 'buscarFreelancer.html';
+            }
+        }
+
+        // Função para salvar as alterações do projeto no localStorage
+        function saveProject() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = parseInt(urlParams.get('id'));
+            const projectName = document.getElementById('project-name').value;
+            const projectDescription = document.getElementById('project-description').value;
+
+            let projects = JSON.parse(localStorage.getItem('projects')) || [];
+            const projectIndex = projects.findIndex(p => p.id === projectId);
+
+            if (projectIndex > -1) {
+                projects[projectIndex] = {
+                    id: projectId,
+                    name: projectName,
+                    description: projectDescription
+                };
+
+                localStorage.setItem('projects', JSON.stringify(projects));
+                alert('Projeto atualizado com sucesso!');
+                location.href = 'buscarFreelancer.html';
+            } else {
+                alert('Projeto não encontrado.');
+            }
+        }
+
+        // Carrega os detalhes do projeto ao carregar a página
+        window.onload = loadProjectDetails;
+    </script>
+</body>
+</html>

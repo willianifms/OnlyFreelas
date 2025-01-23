@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFreelas - Detalhar Perfil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .profile-form {
+            background: #fff;
+            padding: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .profile-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .profile-form input,
+        .profile-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .profile-form button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #58a6ff;
+            color: #fff;
+        }
+        .profile-form button:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Detalhar Perfil</h2>
+    <div class="profile-form">
+        <label for="fantasy-name">Nome Fantasia:</label>
+        <input type="text" id="fantasy-name" name="fantasy-name">
+
+        <label for="description">Descrição:</label>
+        <textarea id="description" name="description" rows="4"></textarea>
+
+        <button onclick="saveProfile()">Cadastrar</button>
+    </div>
+
+    <script>
+        // Função para salvar os detalhes do perfil no localStorage
+        function saveProfile() {
+            const fantasyName = document.getElementById('fantasy-name').value;
+            const description = document.getElementById('description').value;
+
+            if (fantasyName && description) {
+                const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
+                freelancer.fantasyName = fantasyName;
+                freelancer.description = description;
+                localStorage.setItem('freelancer', JSON.stringify(freelancer));
+
+                alert('Perfil detalhado com sucesso!');
+                location.href = 'perfil.html'; // Redireciona de volta para a página de perfil
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+    </script>
+</body>
+</html>
