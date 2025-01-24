@@ -4,26 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyFreelas - Buscar Freelancer</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        header {
-            background-color: #0d1117;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        header a {
-            color: #58a6ff;
-            text-decoration: none;
-            margin-left: 1rem;
-        }
+
         .container {
             padding: 2rem;
         }
@@ -77,10 +62,15 @@
         }
         .project-card .btn-interested::after {
             content: '!';
-            color: #ffeb3b;
-            font-size: 1.2rem;
+            border: solid black;
+            width: 25px;
+            padding: 0px;
+            border-radius: 50%;
+            background-color: #f44336;
+            color: #fff;
+            font-size: 2rem;
             position: absolute;
-            top: -10px;
+            top: -35px;
             right: -10px;
             display: none; /* Inicialmente escondido */
         }
@@ -108,13 +98,12 @@
 </head>
 <body>
     <header>
-        <div>Only<span style="color: #58a6ff;">Freelas</span></div>
+        <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
         <nav>
-            <a href="index.html">Encontre Projeto</a>
-            <a href="tenhoInteresse.html">Interesses</a>
-            <a href="perfil.html">Perfil</a>
+          <a href="buscarFreelancer.html">Projetos</a>
+          <a href="verPerfil.html">Perfil</a>
         </nav>
-    </header>
+      </header>
 
     <div class="container">
         <button class="btn-create" onclick="location.href='criarProjeto.html'">Criar Projeto</button>
@@ -123,7 +112,9 @@
             <!-- Projetos serão listados aqui -->
         </div>
     </div>
-
+    <footer class="footer">
+        <h2>Only<span class="highlight">Freelas</span></h2>
+      </footer>
     <script>
         // Função para carregar os projetos do localStorage
         function loadProjects() {

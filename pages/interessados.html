@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyFreelas - Interessados</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
-        }
+
         .interested-card {
             background: #fff;
             padding: 1rem;
@@ -45,14 +43,63 @@
         .interested-card button:hover {
             background-color: #1e90ff;
         }
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-top: 2px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .toast {
+            background-color: #333;
+            color: white;
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            min-width: 200px;
+            max-width: 300px;
+            display: none;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .toast.success { background-color: #4caf50; }
+        .toast.error { background-color: #f44336; }
+        .toast.show {
+            display: block;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-    <h2>Freelancers Interessados</h2>
+    <header>
+        <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+        <nav>
+          <a href="buscarFreelancer.html">Projetos</a>
+          <a href="verPerfil.html">Perfil</a>
+        </nav>
+      </header>
+    <h2 class="subTitle">Freelancers Interessados</h2>
     <div id="interested-list">
         <!-- Freelancers interessados serão listados aqui -->
     </div>
-
+    <div id="toastContainer" class="toast-container"></div>
+    <footer class="footer">
+        <h2>Only<span class="highlight">Freelas</span></h2>
+      </footer>
     <script>
         // Função para carregar os freelancers interessados do localStorage
         function loadInterestedFreelancers() {
@@ -69,14 +116,15 @@
 
             interestedFreelancers[projectId].forEach(freelancerId => {
                 const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
+                const nameToShow = freelancer.fantasyName ? freelancer.fantasyName : freelancer.nomeCompleto;
 
                 const freelancerCard = document.createElement('div');
                 freelancerCard.classList.add('interested-card');
 
                 freelancerCard.innerHTML = `
-                    <img src="https://via.placeholder.com/40" alt="Avatar">
+                    <img src="../assets/icons/pessoa.png" alt="Avatar">
                     <div>
-                        <h3>${freelancer.nomeCompleto}</h3>
+                        <h3>${nameToShow}</h3>
                         <p>Categoria: ${freelancer.categoriaServico}</p>
                     </div>
                     <button onclick="viewProfile()">Ver Perfil</button>
@@ -89,6 +137,31 @@
         // Função para ver o perfil do freelancer
         function viewProfile() {
             window.location.href = 'perfilFreelancer.html';
+        }
+
+        // Função para exibir toast
+        function showToast(message, type) {
+            const toastContainer = document.getElementById("toastContainer");
+            const toast = document.createElement("div");
+            toast.classList.add("toast");
+            toast.classList.add(type); // 'success' ou 'error'
+            toast.innerText = message;
+
+            // Adiciona o toast à tela
+            toastContainer.appendChild(toast);
+
+            // Exibe o toast com animação
+            setTimeout(() => {
+                toast.classList.add("show");
+            }, 100);
+
+            // Remove o toast após 3 segundos
+            setTimeout(() => {
+                toast.classList.remove("show");
+                setTimeout(() => {
+                    toastContainer.removeChild(toast);
+                }, 500);
+            }, 3000);
         }
 
         // Carrega os freelancers interessados ao carregar a página

@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Freelancer - OnlyFreelas</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
-        }
+
         .profile-card {
             background: #fff;
             padding: 2rem;
@@ -26,16 +24,25 @@
         .profile-card p {
             margin: 0.5rem 0;
         }
+        .contentBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .payment-button {
-            padding: 0.5rem 1rem;
+            text-align: center;
+            width: 360px;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             background-color: #58a6ff;
             color: #fff;
+            font-size: 15px;
+            font-weight: 600;
             text-decoration: none;
             display: inline-block;
-            margin-top: 1rem;
+            margin: 1rem;
         }
         .payment-button:hover {
             background-color: #1e90ff;
@@ -43,30 +50,30 @@
     </style>
 </head>
 <body>
-    <h2>Perfil do Freelancer</h2>
+    <header>
+        <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+        <nav>
+          <a href="buscarFreelancer.html">Projetos</a>
+          <a href="verPerfil.html">Perfil</a>
+        </nav>
+      </header>
+    <h2 class="subTitle">Perfil do Freelancer</h2>
     <div class="profile-card" id="profile-card">
-        <!-- Dados do perfil serão carregados aqui -->
+        <img src="../assets/img/qrpix.png" alt="" srcset="">
     </div>
+<div class="contentBtn">
     <button class="payment-button" onclick="showFullProfile()">Pagar para liberar os dados completos</button>
-
+</div>
+    <footer class="footer">
+        <h2>Only<span class="highlight">Freelas</span></h2>
+      </footer>
     <script>
-        // Função para carregar os dados do perfil do freelancer
-        function loadFreelancerProfile() {
-            const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
-
-            const profileCard = document.getElementById('profile-card');
-            profileCard.innerHTML = `
-                <h3>Nome: ${freelancer.fantasyName || freelancer.nomeCompleto}</h3>
-                <p>Email: ***@***</p>
-                <p>Descrição: ${freelancer.description || 'Descrição não disponível'}</p>
-                <p>Categoria: ${freelancer.categoriaServico}</p>
-            `;
-        }
 
         // Função para exibir o perfil completo após o pagamento
         function showFullProfile() {
             const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
-
+            document.querySelector(".payment-button").style="display: none;"
+            document.querySelector(".profile-card").style="margin:20px auto;"
             const profileCard = document.getElementById('profile-card');
             profileCard.innerHTML = `
                 <h3>Nome: ${freelancer.fantasyName || freelancer.nomeCompleto}</h3>

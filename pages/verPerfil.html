@@ -1,75 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OnlyFreelas - Ver Perfil</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
-        }
-        .profile-card {
-            background: #fff;
-            padding: 2rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            max-width: 600px;
-            margin: auto;
-        }
-        .profile-card h2 {
-            margin-top: 0;
-        }
-        .profile-card p {
-            margin: 0.5rem 0;
-        }
-        .back-button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #58a6ff;
-            color: #fff;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .back-button:hover {
-            background-color: #1e90ff;
-        }
+
+      .profile-card {
+        background: #fff;
+        padding: 2rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        max-width: 600px;
+        margin: auto;
+      }
+      .profile-card h2 {
+        margin-top: 0;
+      }
+      .profile-card p {
+        margin: 0.5rem 0;
+      }
+      .contentBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .back-button {
+        width: 360px;
+        text-align: center;
+        margin: 1%;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #58a6ff;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .back-button:hover {
+        background-color: #1e90ff;
+      }
     </style>
-</head>
-<body>
-    <h2>Seu Perfil</h2>
+  </head>
+  <body>
+
+    <h2 class="subTitle">Seu Perfil</h2>
     <div class="profile-card" id="profile-card">
-        <!-- Dados do perfil serão carregados aqui -->
+      <!-- Dados do perfil serão carregados aqui -->
     </div>
-    <a href="perfil.html" class="back-button">Voltar</a>
+    <div class="contentBtn">
+      <a onclick="goBack()" class="back-button">Voltar</a>
+    </div>
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
 
     <script>
-        // Função para carregar os dados do perfil do localStorage
-        function loadProfile() {
-            const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
 
-            if (Object.keys(freelancer).length === 0) {
-                alert('Nenhum perfil encontrado.');
-                window.location.href = 'perfil.html';
-                return;
-            }
+function goBack() {
+        window.history.back();
+      }
+      // Função para carregar os dados do perfil do localStorage
+      function loadProfile() {
+        const freelancer = JSON.parse(localStorage.getItem("freelancer")) || {};
 
-            const profileCard = document.getElementById('profile-card');
-            profileCard.innerHTML = `
-                <h3>Nome: ${freelancer.fantasyName || freelancer.nomeCompleto}</h3>
-                <p>Email: ${freelancer.email}</p>
-                <p>Categoria: ${freelancer.categoriaServico}</p>
-                <p>Descrição: ${freelancer.description || 'Descrição não disponível'}</p>
-            `;
+        if (Object.keys(freelancer).length === 0) {
+          alert("Nenhum perfil encontrado.");
+          window.location.href = "perfil.html";
+          return;
         }
 
-        // Carrega os dados do perfil ao carregar a página
-        window.onload = loadProfile;
+        const profileCard = document.getElementById("profile-card");
+        profileCard.innerHTML = `
+                <h3>Nome: ${
+                  freelancer.fantasyName || freelancer.nomeCompleto
+                }</h3>
+                <p>Email: ${freelancer.email}</p>
+                <p>Categoria: ${freelancer.categoriaServico}</p>
+                <p>Descrição: ${
+                  freelancer.description || "Descrição não disponível"
+                }</p>
+            `;
+      }
+
+      // Carrega os dados do perfil ao carregar a página
+      window.onload = loadProfile;
     </script>
-</body>
+  </body>
 </html>

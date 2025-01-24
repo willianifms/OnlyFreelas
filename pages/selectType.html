@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OnlyFreelas</title>
@@ -9,36 +9,52 @@
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kadwa:wght@400;700&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body>
+    <link rel="stylesheet" href="../css/loading.css">
+  
+</head>
+<body>
     <header class="header">
-      <h1>Seja Bem vindo ao <span class="highlight">OnlyFreelas</span></h1>
+      <h1>Seja Bem-vindo ao <span class="highlight">OnlyFreelas</span></h1>
     </header>
 
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
     <main class="main-content">
-      <a href="./fichaCadastroFreelancer.html">
-        <button class="option-button">
-          <i class="icon"
-            ><img
-              src="../assets/icons/mala-de-viagem.png"
-              alt="icon maleta job"
-              srcset=""
-          /></i>
+        <button class="option-button" onclick="simulateLoadingT()">
+          <i class="icon">
+            <img src="../assets/icons/mala-de-viagem.png" alt="icon maleta job"/>
+          </i>
           <span>Seja Freelancer</span>
         </button>
-      </a>
-      <a href="./buscarFreelancer.html">
-        <button class="option-button">
-          <i class="icon"
-            ><img src="../assets/icons/lupa.png" alt="icon lupa " srcset=""
-          /></i>
+
+        <button class="option-button" onclick="simulateLoading()">
+          <i class="icon">
+            <img src="../assets/icons/lupa.png" alt="icon lupa"/>
+          </i>
           <span>Buscar Freelancer</span>
-        </button></a
-      >
+        </button>
     </main>
 
     <footer class="footer">
       <h2>Only<span class="highlight">Freelas</span></h2>
     </footer>
-  </body>
+
+    <script>
+      function simulateLoadingT() {
+        document.getElementById("loading").style.display = "flex";
+        setTimeout(() => {
+          window.location.href = "./fichaCadastroFreelancer.html";
+        }, 2000);
+      }
+
+      function simulateLoading() {
+        document.getElementById("loading").style.display = "flex";
+        setTimeout(() => {
+          window.location.href = "./buscarFreelancer.html";
+        }, 2000);
+      }
+    </script>
+</body>
 </html>

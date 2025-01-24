@@ -1,98 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projetos de Interesse</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
-        }
-        .project-card {
-            background: #fff;
-            padding: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1rem;
+      #interested-projects {
+        padding: 5%;
+      }
+      .project-card {
+        background: #fff;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nameImage {
             display: flex;
             align-items: center;
-            justify-content: space-between;
         }
-        .project-card img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-        .project-card h3 {
-            margin: 0 0 0.5rem;
-            color: #0d1117;
-        }
-        .project-card p {
-            margin: 0;
-        }
-        .project-card button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #f44336;
-            color: #fff;
-        }
-        .project-card button:hover {
-            background-color: #d32f2f;
-        }
+      .project-card img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 1rem;
+      }
+      .project-card h3 {
+        margin: 0 0 0.5rem;
+        color: #0d1117;
+      }
+      .project-card p {
+        margin: 0;
+      }
+      .project-card button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #f44336;
+        color: #fff;
+      }
+      .project-card button:hover {
+        background-color: #d32f2f;
+      }
     </style>
-</head>
-<body>
-    <h2>Projetos de Interesse</h2>
+  </head>
+  <body>
+    <header>
+      <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+      <nav>
+        <a href="pageInicialFreelancer.html">Encontre Projeto</a>
+        <a href="tenhoInteresse.html">Interesses</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </header>
+    <h2 style="text-align: center;">Projetos de Interesse</h2>
     <div id="interested-projects"></div>
-
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
     <script>
-        // Função para carregar os projetos de interesse do localStorage
-        function loadInterestedProjects() {
-            const interestedProjects = JSON.parse(localStorage.getItem('interestedItems')) || [];
-            const projectsContainer = document.getElementById('interested-projects');
-            projectsContainer.innerHTML = '';
+      // Função para carregar os projetos de interesse do localStorage
+      function loadInterestedProjects() {
+        const interestedProjects =
+          JSON.parse(localStorage.getItem("interestedItems")) || [];
+        const projectsContainer = document.getElementById(
+          "interested-projects"
+        );
+        projectsContainer.innerHTML = "";
 
-            if (interestedProjects.length === 0) {
-                projectsContainer.innerHTML = '<p>Você não demonstrou interesse em nenhum projeto ainda.</p>';
-                return;
-            }
+        if (interestedProjects.length === 0) {
+          projectsContainer.innerHTML =
+            "<p>Você não demonstrou interesse em nenhum projeto ainda.</p>";
+          return;
+        }
 
-            interestedProjects.forEach((project, index) => {
-                const projectCard = document.createElement('div');
-                projectCard.classList.add('project-card');
+        interestedProjects.forEach((project, index) => {
+          const projectCard = document.createElement("div");
+          projectCard.classList.add("project-card");
 
-                projectCard.innerHTML = `
+          projectCard.innerHTML = `
                     <div>
-                        <img src="https://via.placeholder.com/40" alt="Avatar">
-                        <div>
-                            <h3>${project.name}</h3>
+                         <div class="nameImage" > <img src="../assets/icons/pessoa.png" alt="Avatar">
+                        <h3>${project.name}</h3>    
+                            </div>
+                    
+    
                             <p>${project.description}</p>
                             <p>Categoria: ${project.category}</p>
-                        </div>
+                  
                     </div>
                     <button onclick="removeInterest(${index})">Remover Interesse</button>
                 `;
 
-                projectsContainer.appendChild(projectCard);
-            });
-        }
+          projectsContainer.appendChild(projectCard);
+        });
+      }
 
-        // Função para remover o interesse de um projeto
-        function removeInterest(index) {
-            let interestedProjects = JSON.parse(localStorage.getItem('interestedItems')) || [];
-            interestedProjects.splice(index, 1);
-            localStorage.setItem('interestedItems', JSON.stringify(interestedProjects));
-            loadInterestedProjects(); // Atualiza a lista de projetos após remover
-        }
+      // Função para remover o interesse de um projeto
+      function removeInterest(index) {
+        let interestedProjects =
+          JSON.parse(localStorage.getItem("interestedItems")) || [];
+        interestedProjects.splice(index, 1);
+        localStorage.setItem(
+          "interestedItems",
+          JSON.stringify(interestedProjects)
+        );
+        loadInterestedProjects(); // Atualiza a lista de projetos após remover
+      }
 
-        // Carrega os projetos de interesse ao carregar a página
-        window.onload = loadInterestedProjects;
+      // Carrega os projetos de interesse ao carregar a página
+      window.onload = loadInterestedProjects;
     </script>
-</body>
+  </body>
 </html>

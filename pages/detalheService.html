@@ -1,93 +1,228 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detalhe do Serviço</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
+      /* Estilos do Loading */
+      .loading {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-top: 2px solid #333;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        #item-detail {
-            background: #fff;
-            padding: 2rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 1rem;
+        100% {
+          transform: rotate(360deg);
         }
-        button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 1rem;
-        }
-        button:hover {
-            background-color: #ddd;
-        }
+      }
+
+      /* Estilos do Toast */
+      .toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+
+      .toast {
+        background-color: #333;
+        color: white;
+        padding: 12px 20px;
+        margin: 10px;
+        border-radius: 5px;
+        min-width: 200px;
+        max-width: 300px;
+        display: none;
+        font-size: 14px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .toast.success {
+        background-color: #4caf50;
+      }
+
+      .toast.error {
+        background-color: #f44336;
+      }
+
+      .toast.show {
+        display: block;
+        opacity: 1;
+      }
+
+      img {
+        border: solid 2px #00aff0;
+        padding: 20px;
+        border-radius: 50%;
+      }
+      #item-detail {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+      }
+
+      .containerBtn {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0rem;
+      }
+      button {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 1rem;
+        font-weight: 700;
+        color: white;
+      }
+      button:hover {
+       opacity: 0.8;
+      }
+      .interesseBtn{
+        background-color: #00aff0;
+      }
+      .voltarBtn{
+        background-color: #f44336;
+      }
     </style>
 </head>
 <body>
+    <header>
+      <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+      <nav>
+        <a href="pageInicialFreelancer.html">Encontre Projeto</a>
+        <a href="tenhoInteresse.html">Interesses</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </header>
     <div id="item-detail">
-        <h2 id="item-name">Nome do Item</h2>
-        <p id="item-description">Descrição completa do item...</p>
-        <p id="item-category">Categoria: </p>
+      <img src="../assets/icons/pessoa.png" alt="Avatar" />
+      <h2 id="item-name">Nome do Item</h2>
+      <p id="item-description">Descrição completa do item...</p>
+      <p id="item-category">Categoria:</p>
+      <div class="loading" id="loading"></div>
     </div>
-    <button onclick="goBack()">Voltar</button>
-    <button onclick="showInterest()">Tenho Interesse</button>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    
+
+    <section class="containerBtn">
+        <button onclick="goBack()" class="voltarBtn">Voltar</button>
+        <button onclick="showInterest()" class="interesseBtn">Tenho Interesse</button>
+    </section>
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
 
     <script>
-        // Função para carregar os detalhes do projeto com base no ID na URL
-        function loadItemDetails() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const itemId = parseInt(urlParams.get('id'));
-            const projects = JSON.parse(localStorage.getItem('projects')) || [];
-            const project = projects.find(p => p.id === itemId);
+      // Função para mostrar um toast
+      function showToast(message, type) {
+        const toastContainer = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.classList.add("toast");
+        toast.classList.add(type); // 'success' ou 'error'
+        toast.innerText = message;
 
-            if (project) {
-                document.getElementById('item-name').innerText = project.name;
-                document.getElementById('item-description').innerText = project.description;
-                document.getElementById('item-category').innerText = `Categoria: ${project.category}`;
-            } else {
-                alert('Projeto não encontrado.');
-                goBack();
-            }
+        // Adiciona o toast à tela
+        toastContainer.appendChild(toast);
+
+        // Exibe o toast com animação
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 100);
+
+        // Remove o toast após 3 segundos
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => {
+            toastContainer.removeChild(toast);
+          }, 500);
+        }, 3000);
+      }
+
+      // Função para carregar os detalhes do projeto com base no ID na URL
+      function loadItemDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = parseInt(urlParams.get("id"));
+        const projects = JSON.parse(localStorage.getItem("projects")) || [];
+        const project = projects.find((p) => p.id === itemId);
+
+        if (project) {
+          document.getElementById("item-name").innerText = project.name;
+          document.getElementById("item-description").innerText =
+            project.description;
+          document.getElementById(
+            "item-category"
+          ).innerText = `Categoria: ${project.category}`;
+        } else {
+          showToast("Projeto não encontrado.", "error");
+          goBack();
         }
+      }
 
-        // Função para voltar para a página anterior
-        function goBack() {
-            window.history.back();
+      // Função para voltar para a página anterior
+      function goBack() {
+        window.history.back();
+      }
+
+      // Função para mostrar interesse (salva o projeto no localStorage)
+      function showInterest() {
+        document.getElementById("loading").style.display = "flex";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemId = parseInt(urlParams.get("id"));
+        const projects = JSON.parse(localStorage.getItem("projects")) || [];
+        const project = projects.find((p) => p.id === itemId);
+
+        if (project) {
+          let interestedItems =
+            JSON.parse(localStorage.getItem("interestedItems")) || [];
+          interestedItems.push(project);
+          localStorage.setItem(
+            "interestedItems",
+            JSON.stringify(interestedItems)
+          );
+
+          // Adiciona o ID do freelancer interessado ao projeto
+          let interestedFreelancers =
+            JSON.parse(localStorage.getItem("interestedFreelancers")) || {};
+          interestedFreelancers[itemId] = interestedFreelancers[itemId] || [];
+          interestedFreelancers[itemId].push("Freelancer1"); // Substitua 'Freelancer1' pelo ID real do freelancer
+          localStorage.setItem(
+            "interestedFreelancers",
+            JSON.stringify(interestedFreelancers)
+          );
+
+          showToast("Você demonstrou interesse neste item!", "success");
+
+          setTimeout(() => {
+            document.getElementById("loading").style.display = "none";
+            goBack();
+          }, 3000);
+        } else {
+          showToast("Projeto não encontrado.", "error");
+          document.getElementById("loading").style.display = "none";
         }
+      }
 
-        // Função para mostrar interesse (salva o projeto no localStorage)
-        function showInterest() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const itemId = parseInt(urlParams.get('id'));
-            const projects = JSON.parse(localStorage.getItem('projects')) || [];
-            const project = projects.find(p => p.id === itemId);
-
-            if (project) {
-                let interestedItems = JSON.parse(localStorage.getItem('interestedItems')) || [];
-                interestedItems.push(project);
-                localStorage.setItem('interestedItems', JSON.stringify(interestedItems));
-
-                // Adiciona o ID do freelancer interessado ao projeto
-                let interestedFreelancers = JSON.parse(localStorage.getItem('interestedFreelancers')) || {};
-                interestedFreelancers[itemId] = interestedFreelancers[itemId] || [];
-                interestedFreelancers[itemId].push('Freelancer1'); // Substitua 'Freelancer1' pelo ID real do freelancer
-                localStorage.setItem('interestedFreelancers', JSON.stringify(interestedFreelancers));
-
-                alert('Você demonstrou interesse neste item!');
-            } else {
-                alert('Projeto não encontrado.');
-            }
-        }
-
-        // Carrega os detalhes do projeto ao carregar a página
-        window.onload = loadItemDetails;
+      // Carrega os detalhes do projeto ao carregar a página
+      window.onload = loadItemDetails;
     </script>
 </body>
 </html>

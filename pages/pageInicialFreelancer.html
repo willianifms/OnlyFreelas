@@ -4,48 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OnlyFreelas - Página Inicial</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/header.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        header {
-            background-color: #0d1117;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        header a {
-            color: #58a6ff;
-            text-decoration: none;
-            margin-left: 1rem;
-        }
         .container {
             display: flex;
+            justify-content: space-around;
             padding: 2rem;
         }
         .filter {
-            width: 25%;
+            width: 15%;
+            margin-top: 1.5rem;
+            height: 200px;
+            position: fixed;
+            left: 2.5rem;
             margin-right: 2rem;
+            border: solid 1px #000;
+            border-radius: 8%;
+            padding: 20px 20px 0 20px;
         }
         .filter select {
             width: 100%;
-            padding: 0.5rem;
+            padding: 0.5rem ;
             border: 1px solid #58a6ff;
             border-radius: 5px;
             font-size: 1rem;
         }
         .projects {
-            width: 75%;
+            margin-left: 5rem;
+            width: 60%;
         }
         .project-card {
             background: #fff;
-            padding: 1rem;
-            border: 1px solid #ccc;
+            padding: 2rem;
+            border: 1px solid #000;
             border-radius: 5px;
             margin-bottom: 1rem;
             display: flex;
@@ -56,6 +49,11 @@
             height: 40px;
             border-radius: 50%;
             margin-right: 1rem;
+        }
+
+        .project-card .nameImage {
+            display: flex;
+            align-items: center;
         }
         .project-card h3 {
             margin: 0 0 0.5rem;
@@ -74,7 +72,7 @@
 </head>
 <body>
     <header>
-        <div>Only<span style="color: #58a6ff;">Freelas</span></div>
+        <h1>Only<span style="color: #58a6ff;">Freelas</span></h1>
         <nav>
             <a href="pageInicialFreelancer.html">Encontre Projeto</a>
             <a href="tenhoInteresse.html">Interesses</a>
@@ -102,6 +100,9 @@
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <h2>Only<span class="highlight">Freelas</span></h2>
+      </footer>
 
     <script>
         // Função para carregar os projetos do localStorage
@@ -121,9 +122,12 @@
                 projectCard.setAttribute('data-category', project.category);
 
                 projectCard.innerHTML = `
-                    <img src="https://via.placeholder.com/40" alt="Avatar">
+                    
                     <div>
-                        <h3>${project.name}</h3>
+                        <div class="nameImage" > <img src="../assets/icons/pessoa.png" alt="Avatar">
+                        <h3>${project.name}</h3>    
+                            </div>
+                        
                         <p>${project.description}</p>
                         <p>Categoria: ${project.category}</p>
                         <a href="detalheService.html?id=${project.id}">Ver detalhes</a>

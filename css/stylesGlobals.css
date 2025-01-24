@@ -1,14 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Kadwa:wght@700&display=swap');
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Kadwa", sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   
-  header {
-    background-color: #222;
-    color: white;
-    padding: 1rem;
+  .subTitle {
     text-align: center;
+    text-transform: uppercase;
   }
   
   main {

@@ -1,63 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OnlyFreelas - Perfil</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        header {
-            background-color: #0d1117;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        header a {
-            color: #58a6ff;
-            text-decoration: none;
-            margin-left: 1rem;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
-        .btn {
-            padding: 1rem 2rem;
-            margin: 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            background-color: #58a6ff;
-            color: #fff;
-        }
-        .btn:hover {
-            background-color: #1e90ff;
-        }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        margin-top: 5%;
+      }
+      .btn {
+        width: 220px;
+        padding: 1rem 2rem;
+        margin: 1rem;
+       
+        background-color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.25rem;
+        border: solid 2px #58a6ff;
+        color: #000;
+      }
+      .btn:hover {
+        background-color: #1e90ff;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div>Only<span style="color: #58a6ff;">Freelas</span></div>
-        <nav>
-            <a href="./pageInicialFreelancer.html">Encontre Projeto</a>
-            <a href="tenhoInteresse.html">Interesses</a>
-            <a href="perfil.html">Perfil</a>
-        </nav>
+      <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+      <nav>
+        <a href="pageInicialFreelancer.html">Encontre Projeto</a>
+        <a href="tenhoInteresse.html">Interesses</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
     </header>
 
     <div class="container">
-        <button class="btn" onclick="location.href='verPerfil.html'">Ver Perfil</button>
-        <button class="btn" onclick="location.href='detalharPerfil.html'">Detalhar Perfil</button>
+      <button class="btn" onclick="location.href='verPerfil.html'">
+        Ver Perfil
+      </button>
+      <button class="btn" onclick="location.href='detalharPerfil.html'">
+        Detalhar Perfil
+      </button>
     </div>
-</body>
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
+  </body>
 </html>

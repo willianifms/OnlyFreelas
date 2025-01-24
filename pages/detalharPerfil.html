@@ -1,79 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OnlyFreelas - Detalhar Perfil</title>
+    <link rel="stylesheet" href="../css/stylesGlobals.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/header.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background-color: #f8f9fa;
-        }
-        .profile-form {
-            background: #fff;
-            padding: 2rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .profile-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        .profile-form input,
-        .profile-form textarea {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .profile-form button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #58a6ff;
-            color: #fff;
-        }
-        .profile-form button:hover {
-            background-color: #1e90ff;
-        }
+      .profile-form {
+        padding: 1rem 5rem;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        max-width: 600px;
+        margin: 2% auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+      }
+      .profile-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        text-align: left;
+    
+      }
+      .profile-form input,
+      .profile-form textarea {
+        width: 100%;
+        padding: 2rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .profile-form input{
+        padding: 0.75rem 2rem;
+      }
+
+      .profile-form button {
+        padding: 1rem 2rem;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: #58a6ff;
+        color: #fff;
+      }
+      .profile-form button:hover {
+        background-color: #1e90ff;
+      }
     </style>
-</head>
-<body>
-    <h2>Detalhar Perfil</h2>
+  </head>
+  <body>
+    <header>
+      <h1>Only<span style="color: #58a6ff">Freelas</span></h1>
+      <nav>
+        <a href="pageInicialFreelancer.html">Encontre Projeto</a>
+        <a href="tenhoInteresse.html">Interesses</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </header>
+    <h2 class="subTitle">Detalhar Perfil</h2>
     <div class="profile-form">
-        <label for="fantasy-name">Nome Fantasia:</label>
-        <input type="text" id="fantasy-name" name="fantasy-name">
+      <label for="fantasy-name">Nome Fantasia:</label>
+      <input type="text" id="fantasy-name" name="fantasy-name" />
 
-        <label for="description">Descrição:</label>
-        <textarea id="description" name="description" rows="4"></textarea>
+      <label for="description">Descrição:</label>
+      <textarea id="description" name="description" rows="4"></textarea>
 
+      <div class="contentBtn">
         <button onclick="saveProfile()">Cadastrar</button>
+      </div>
     </div>
+    <footer class="footer">
+      <h2>Only<span class="highlight">Freelas</span></h2>
+    </footer>
 
     <script>
-        // Função para salvar os detalhes do perfil no localStorage
-        function saveProfile() {
-            const fantasyName = document.getElementById('fantasy-name').value;
-            const description = document.getElementById('description').value;
+      // Função para salvar os detalhes do perfil no localStorage
+      function saveProfile() {
+        const fantasyName = document.getElementById("fantasy-name").value;
+        const description = document.getElementById("description").value;
 
-            if (fantasyName && description) {
-                const freelancer = JSON.parse(localStorage.getItem('freelancer')) || {};
-                freelancer.fantasyName = fantasyName;
-                freelancer.description = description;
-                localStorage.setItem('freelancer', JSON.stringify(freelancer));
+        if (fantasyName && description) {
+          const freelancer =
+            JSON.parse(localStorage.getItem("freelancer")) || {};
+          freelancer.fantasyName = fantasyName;
+          freelancer.description = description;
+          localStorage.setItem("freelancer", JSON.stringify(freelancer));
 
-                alert('Perfil detalhado com sucesso!');
-                location.href = 'perfil.html'; // Redireciona de volta para a página de perfil
-            } else {
-                alert('Por favor, preencha todos os campos.');
-            }
+          alert("Perfil detalhado com sucesso!");
+          location.href = "perfil.html"; // Redireciona de volta para a página de perfil
+        } else {
+          alert("Por favor, preencha todos os campos.");
         }
+      }
     </script>
-</body>
+  </body>
 </html>
